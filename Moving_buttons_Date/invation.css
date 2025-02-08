@@ -1,0 +1,41 @@
+body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+button {
+    color: white;
+    padding: 10px;
+    border-radius: 13px;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: 0.3s;
+}
+
+#yes {
+    background-color: blue;
+    border: 3px solid blue;
+    margin: 15px;
+}
+
+#no {
+    background-color: red;
+    border: 3px solid red;
+    position: absolute;
+}
