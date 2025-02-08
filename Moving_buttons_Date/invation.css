@@ -1,19 +1,33 @@
 body {
-    background-color: black;
+    background-color: pink;
+    background-image: url('https://www.transparenttextures.com/patterns/flowers.png'); /* Floral background */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
+    color: black;
+    font-style: Brush Script MT;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: "Rouge Script", serif;
+    overflow: hidden; /* Prevents accidental scrolling */
 }
 
 .box {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
     padding: 20px;
     border-radius: 10px;
     position: relative;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px; /* Space between Yes and No buttons */
+    margin-top: 20px; /* Adds spacing from the text */
 }
 
 button {
@@ -31,11 +45,10 @@ button {
 #yes {
     background-color: blue;
     border: 3px solid blue;
-    margin: 15px;
 }
 
 #no {
     background-color: red;
     border: 3px solid red;
-    position: absolute;
+    position: relative; /* Ensures it stays in place initially */
 }
