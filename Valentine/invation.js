@@ -3,9 +3,14 @@ const noBtn = document.getElementById("no");
 const heading = document.getElementById("head");
 const box = document.querySelector(".box");
 
-yesBtn.addEventListener("click", () => {
-    heading.innerHTML = "Yay! 🎉 Can't wait!";
-});
+function openEnvelopePage() {
+    window.location.href = "envelope.html";  // Redirect to envelope.html in the same folder
+}
+
+document.getElementById("yes").addEventListener("click", openEnvelopePage);
+
+
+
 
 noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", moveButton);
