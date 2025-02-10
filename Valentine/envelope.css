@@ -48,6 +48,7 @@
     height: 100vh;
     display: grid;
     place-items: center;
+    z-index: 1;
   }
   .container > .envelope-wrapper {
     background: var(--bg-envelope-color);
