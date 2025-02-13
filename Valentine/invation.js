@@ -34,3 +34,30 @@ function moveButton() {
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const heartContainer = document.createElement("div");
+    heartContainer.classList.add("heart-container");
+    document.body.appendChild(heartContainer);
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️"; // Heart Symbol
+        heart.classList.add("heart");
+
+        let randomSize = Math.random() * 20 + 10; // Random size (10px - 30px)
+        let randomLeft = Math.random() * 100; // Random horizontal position
+
+        heart.style.left = randomLeft + "vw";
+        heart.style.fontSize = randomSize + "px";
+        heart.style.animationDuration = Math.random() * 3 + 3 + "s"; // Random speed (3-6s)
+
+        heartContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000); // Remove after animation ends
+    }
+
+    setInterval(createHeart, 300); // Generate hearts continuously
+});
