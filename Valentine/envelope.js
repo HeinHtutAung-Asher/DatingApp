@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "images/N12.jpg",
         "images/N13.jpg",
         "images/N14.jpg",
+        "images/N15.jpg",
+        "images/N16.jpeg",
+        "images/N17.jpg",
+
     ];
 
     function createFloatingImages() {
