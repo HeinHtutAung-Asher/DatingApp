@@ -24,72 +24,58 @@ document.addEventListener("DOMContentLoaded", function () {
         "images/N14.jpg",
     ];
 
-    function createScatteredImages() {
+    function createFloatingImages() {
         const container = document.querySelector(".floating-images");
-        const envelope = document.querySelector(".container");
 
-        if (!container || !envelope) {
-            console.error("Error: Missing required elements!");
+        if (!container) {
+            console.error("Error: Missing floating-images container!");
             return;
         }
 
-        const envelopeRect = envelope.getBoundingClientRect();
-        const placedPositions = new Set();
-        const gridRows = 4; // More rows = better spread
-        const gridCols = 5; // More columns = better spread
+        const gridRows = 4; 
+        const gridCols = 5;
         const cellWidth = 100 / gridCols;
         const cellHeight = 100 / gridRows;
-        const imgSize = 150; // Image size
+        let usedPositions = new Set();
 
-        function placeImage(src) {
+        function getRandomGridPosition() {
+            let row, col, key, attempts = 0;
+
+            do {
+                row = Math.floor(Math.random() * gridRows);
+                col = Math.floor(Math.random() * gridCols);
+                key = `${row}-${col}`;
+                attempts++;
+            } while (usedPositions.has(key) && attempts < 50);
+
+            usedPositions.add(key);
+            return { top: row * cellHeight, left: col * cellWidth };
+        }
+
+        imagePaths.forEach((src, index) => {
             let img = document.createElement("img");
             img.src = src;
             img.classList.add("scattered-image");
 
-            let validPosition = false;
-            let attempts = 0;
-            let randomRow, randomCol;
+            let { top, left } = getRandomGridPosition();
+            let randomDelay = Math.random() * 5; // Random delay for smoother animation
 
-            while (!validPosition && attempts < 100) {
-                attempts++;
+            img.style.top = top + "%";
+            img.style.left = left + "%";
+            img.style.animationDelay = randomDelay + "s";
 
-                randomRow = Math.floor(Math.random() * gridRows);
-                randomCol = Math.floor(Math.random() * gridCols);
-                let positionKey = `${randomRow}-${randomCol}`;
-
-                if (!placedPositions.has(positionKey)) {
-                    placedPositions.add(positionKey);
-                    validPosition = true;
-                }
-            }
-
-            let randomTop = randomRow * cellHeight + Math.random() * (cellHeight * 0.5);
-            let randomLeft = randomCol * cellWidth + Math.random() * (cellWidth * 0.5);
-            let topPixels = window.innerHeight * (randomTop / 100);
-            let leftPixels = window.innerWidth * (randomLeft / 100);
-
-            // Ensure it doesn't overlap the envelope
-            let overlapsEnvelope = (
-                topPixels + imgSize > envelopeRect.top &&
-                topPixels < envelopeRect.bottom &&
-                leftPixels + imgSize > envelopeRect.left &&
-                leftPixels < envelopeRect.right
-            );
-
-            if (overlapsEnvelope) return;
-
-            img.style.position = "absolute";
-            img.style.top = randomTop + "%";
-            img.style.left = randomLeft + "%";
-            img.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+            img.addEventListener("animationiteration", () => {
+                let { top, left } = getRandomGridPosition();
+                img.style.top = top + "%";
+                img.style.left = left + "%";
+            });
 
             container.appendChild(img);
-        }
-
-        imagePaths.forEach((src) => placeImage(src));
+        });
     }
 
-    createScatteredImages();
+    createFloatingImages();
 });
+
 
 

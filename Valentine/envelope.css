@@ -24,6 +24,11 @@
     position: relative;
 }
 
+html, body {
+    height: 100vh;  /* Locks the viewport height */
+    overflow: hidden; /* Prevents scrolling */
+}
+
 /* Container for floating images */
 .floating-images {
     position: absolute;
@@ -142,4 +147,26 @@
     transition-delay: 0.4s;
   }
 
-  
+  @keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+.scattered-image {
+    position: absolute;
+    width: 150px; /* Adjust size */
+    height: auto;
+    opacity: 0.9;
+    animation: floatUp 10s linear infinite; /* Images float up infinitely */
+    transition: transform 0.5s ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); /* Soft glowing effect */
+}
